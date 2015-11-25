@@ -1,3 +1,5 @@
+# Works alright for 13195 but takes too long for 600851475143
+
 # Enter your procedural solution here!
 def largest_prime_factor(input)
   prime_factors(input).max
@@ -5,17 +7,12 @@ end
 
 def factors(input)
   integer = 2
-  first_half_factors = []
-  while integer <= input ** 0.5
-    input % integer == 0 ? first_half_factors << integer : first_half_factors
+  factors = Array.new(1, 1)
+  while integer <= input
+    input % integer == 0 ? factors << integer : factors
     integer += 1
   end
-  second_half_factors = []
-  first_half_factors.each do |factor|
-    second_half_factors << input / factor
-  end
-  factors = first_half_factors + second_half_factors
-  factors.sort; factors.uniq
+  factors.pop; factors.shift
   factors
 end
 
@@ -54,7 +51,7 @@ end
 
 print "factors(13195) is #{factors(13195)}"
 print "largest_prime_factor(13195) is #{largest_prime_factor(13195)}"
-print "factors(600851475143) is #{factors(600851475143)}"
-print "largest_prime_factor(600851475143) is #{largest_prime_factor(600851475143)}"
+# print "factors(600851475143) is #{factors(600851475143)}"
+# print "largest_prime_factor(600851475143) is #{largest_prime_factor(600851475143)}"
 # print 13195.prime?  # this is not a real method
 # print 3.prime?      # this is not a real method
